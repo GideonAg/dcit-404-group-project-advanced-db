@@ -3,9 +3,9 @@ import java.awt.*;
 import java.sql.*;
 
 public class TrainingCompanyApp extends JFrame {
-    private static final String url = "jdbc:oracle:thin:@localhost:1521:orcl";
-    private static final String user = "hr";
-    private static final String password = "hr_password";
+    private static final String url = "jdbc:oracle:thin:@localhost:1521:XE";
+    private static final String user = "system";
+    private static final String password = "DCIT404group";
     public static Connection con;
 
     public TrainingCompanyApp() {
@@ -62,13 +62,15 @@ public class TrainingCompanyApp extends JFrame {
         }
     }
 
-    public static void main(String[] args) {
-            new TrainingCompanyApp();
-//        try {
-//            con = DriverManager.getConnection(url, user, password);
+    public static void main(String[] args) throws ClassNotFoundException {
 //            new TrainingCompanyApp();
-//        } catch (SQLException sqlEx) {
-//            sqlEx.printStackTrace();
-//        }
+//        Class.forName("oracle.jdbc.OracleDriver");
+        try {
+            con = DriverManager.getConnection(url, user, password);
+            System.out.println("Connected to the database successfully!");
+            new TrainingCompanyApp();
+        } catch (SQLException sqlEx) {
+            sqlEx.printStackTrace();
+        }
     }
 }
