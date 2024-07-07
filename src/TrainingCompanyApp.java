@@ -1,9 +1,10 @@
 import javax.swing.*;
 import java.awt.*;
 import java.sql.*;
+import java.util.Properties;
 
 public class TrainingCompanyApp extends JFrame {
-    private static final String url = "jdbc:oracle:thin:@localhost:1521:XE";
+    private static final String url = "jdbc:oracle:thin:@//localhost:1521/XE";
     private static final String user = "system";
     private static final String password = "DCIT404group";
     public static Connection con;
@@ -63,10 +64,14 @@ public class TrainingCompanyApp extends JFrame {
     }
 
     public static void main(String[] args) throws ClassNotFoundException {
-//            new TrainingCompanyApp();
-//        Class.forName("oracle.jdbc.OracleDriver");
+        Class.forName("oracle.jdbc.OracleDriver");
+        Properties properties = new Properties();
+        properties.setProperty("user", user);
+        properties.setProperty("password", password);
+        properties.setProperty("internal_logon", "sysdba");
+
         try {
-            con = DriverManager.getConnection(url, user, password);
+            con = DriverManager.getConnection(url, properties);
             System.out.println("Connected to the database successfully!");
             new TrainingCompanyApp();
         } catch (SQLException sqlEx) {
