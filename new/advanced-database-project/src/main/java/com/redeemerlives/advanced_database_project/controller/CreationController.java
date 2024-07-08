@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api")
 public class CreationController {
@@ -54,6 +56,11 @@ public class CreationController {
     public ResponseEntity<CourseType> createCourseType(@RequestBody CourseType courseType) {
         CourseType savedCourseType = courseTypeRepository.save(courseType);
         return ResponseEntity.ok(savedCourseType);
+    }
+
+    @GetMapping("/courseTypes")
+    public ResponseEntity<List<CourseType>> getAllCourseType() {
+        return ResponseEntity.ok(courseTypeRepository.findAll());
     }
 
     @PostMapping("/createInvoice")
