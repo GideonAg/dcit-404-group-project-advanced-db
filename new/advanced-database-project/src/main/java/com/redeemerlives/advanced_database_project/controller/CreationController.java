@@ -3,7 +3,7 @@ package com.redeemerlives.advanced_database_project.controller;
 import com.redeemerlives.advanced_database_project.Booking;
 import com.redeemerlives.advanced_database_project.entity.*;
 import com.redeemerlives.advanced_database_project.repository.*;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,33 +11,32 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
+@RequiredArgsConstructor
 public class CreationController {
 
-    @Autowired
-    private LocationRepository locationRepository;
+    private final LocationRepository locationRepository;
 
-    @Autowired
-    private BookingRepository bookingRepository;
+    private final BookingRepository bookingRepository;
 
-    @Autowired
-    private CourseFeeRepository courseFeeRepository;
+    private final CourseFeeRepository courseFeeRepository;
 
-    @Autowired
-    private CourseTypeRepository courseTypeRepository;
+    private final CourseTypeRepository courseTypeRepository;
 
-    @Autowired
-    private InvoiceRepository invoiceRepository;
+    private final InvoiceRepository invoiceRepository;
 
-    @Autowired
-    private RegistrationRepository registrationRepository;
+    private final RegistrationRepository registrationRepository;
 
-    @Autowired
-    private PaymentMethodRepository paymentMethodRepository;
+    private final PaymentMethodRepository paymentMethodRepository;
 
     @PostMapping("/createLocation")
     public ResponseEntity<Location> createLocation(@RequestBody Location location) {
         Location savedLocation = locationRepository.save(location);
         return ResponseEntity.ok(savedLocation);
+    }
+
+    @GetMapping("/createLocation")
+    public ResponseEntity<List<Location>> getLocations() {
+        return ResponseEntity.ok(locationRepository.findAll());
     }
 
     @PostMapping("/createBooking")
@@ -50,6 +49,11 @@ public class CreationController {
     public ResponseEntity<CourseFee> createCourseFee(@RequestBody CourseFee courseFee) {
         CourseFee savedCourseFee = courseFeeRepository.save(courseFee);
         return ResponseEntity.ok(savedCourseFee);
+    }
+
+    @GetMapping("/courseFee")
+    public ResponseEntity<List<CourseFee>> getAllCourseFee() {
+        return ResponseEntity.ok(courseFeeRepository.findAll());
     }
 
     @PostMapping("/createCourseType")
@@ -79,6 +83,11 @@ public class CreationController {
     public ResponseEntity<PaymentMethod> createPayment(@RequestBody PaymentMethod paymentMethod) {
         PaymentMethod paymentMethod1 = paymentMethodRepository.save(paymentMethod);
         return ResponseEntity.ok(paymentMethod1);
+    }
+
+    @GetMapping("/getPayment")
+    public ResponseEntity<List<PaymentMethod>> getAllPayments() {
+        return ResponseEntity.ok(paymentMethodRepository.findAll());
     }
 }
 
