@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { BASE_API } from "../utils";
 
 function AddCourseTypeForm() {
   const [formData, setFormData] = useState({
@@ -16,7 +17,7 @@ function AddCourseTypeForm() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch("/api/courseTypes/createCourseType", {
+      const response = await fetch(BASE_API + "/api/courseTypes", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),

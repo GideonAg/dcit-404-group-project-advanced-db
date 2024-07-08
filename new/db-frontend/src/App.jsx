@@ -20,7 +20,6 @@ function App() {
         <Route path="/addCourseType" element={<AddCourseTypeForm />} />
         <Route path="/addLocation" element={<AddLocationForm />} />
         <Route path="/addBooking" element={<AddBookingForm />} />
-        <Route path="/addBooking" element={<AddBookingForm />} />
         <Route path="/addCourseFee" element={<AddCourseFeeForm />} />
         <Route path="/addInvoice" element={<AddInvoiceForm />} />
         <Route path="/addRegistration" element={<AddRegistrationForm />} />

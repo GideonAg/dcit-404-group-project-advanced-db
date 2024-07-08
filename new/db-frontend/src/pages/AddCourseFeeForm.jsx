@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { BASE_API } from "../utils";
 
 function AddCourseFeeForm() {
   const [courseFeeData, setCourseFeeData] = useState({
@@ -10,10 +11,10 @@ function AddCourseFeeForm() {
 
   // Fetch Courses on component mount
   useEffect(() => {
-    fetch("/api/courses")
+    fetch(BASE_API + "/api/courses")
       .then((response) => response.json())
       .then((data) => setCourses(data))
-      .catch((error) => console.error("Error fetching courses:", error));
+      .catch((error) => alert("Error fetching courses:", error));
   }, []);
 
   const handleChange = (event) => {
@@ -32,7 +33,7 @@ function AddCourseFeeForm() {
     }
 
     try {
-      const response = await fetch("/api/courseFees/createCourseFee", {
+      const response = await fetch(BASE_API + "/api/createCourseFee", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(courseFeeData),

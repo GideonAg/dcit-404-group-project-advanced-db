@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { BASE_API } from "../utils";
 
 function AddInvoiceForm() {
   const [invoiceData, setInvoiceData] = useState({
@@ -15,12 +16,12 @@ function AddInvoiceForm() {
 
   // Fetch Registrations and Payment Methods on component mount
   useEffect(() => {
-    fetch("/api/registrations")
+    fetch(BASE_API + "/api/registrations")
       .then((response) => response.json())
       .then((data) => setRegistrations(data))
       .catch((error) => console.error("Error fetching registrations:", error));
 
-    fetch("/api/paymentMethods")
+    fetch(BASE_API + "/api/getPayment")
       .then((response) => response.json())
       .then((data) => setPaymentMethods(data))
       .catch((error) =>
@@ -39,7 +40,7 @@ function AddInvoiceForm() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch("/api/invoices/createInvoice", {
+      const response = await fetch(BASE_API + "/api/createInvoice", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(invoiceData),
@@ -54,7 +55,7 @@ function AddInvoiceForm() {
           expiryDate: "",
           registrationNo: "",
           paymentMethodNo: "",
-        }); // Clear the form
+        });
       } else {
         alert("Failed to create invoice");
       }

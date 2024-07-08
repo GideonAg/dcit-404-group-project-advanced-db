@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { BASE_API } from "../utils";
 
 function AddPaymentMethodForm() {
   const [paymentMethodData, setPaymentMethodData] = useState({
@@ -17,14 +18,13 @@ function AddPaymentMethodForm() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch("/api/paymentMethods/createPaymentMethod", {
+      const response = await fetch(BASE_API + "/api/createPayment", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(paymentMethodData),
       });
       if (response.ok) {
         alert("Payment method created successfully");
-        // Optionally clear the form
         setPaymentMethodData({
           methodName: "",
           description: "",

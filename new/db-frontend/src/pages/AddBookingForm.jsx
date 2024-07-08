@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { BASE_API } from "../utils";
 
 function AddBookingForm() {
   const [bookingData, setBookingData] = useState({
@@ -13,13 +14,13 @@ function AddBookingForm() {
 
   // Fetch Locations, Courses, and Employees on component mount
   useEffect(() => {
-    fetch("/api/locations")
+    fetch(BASE_API + "/api/locations")
       .then((res) => res.json())
       .then(setLocations);
-    fetch("/api/courses")
+    fetch(BASE_API + "/api/courses")
       .then((res) => res.json())
       .then(setCourses);
-    fetch("/api/employees")
+    fetch(BASE_API + "/api/employees")
       .then((res) => res.json())
       .then(setEmployees);
   }, []);
@@ -35,14 +36,13 @@ function AddBookingForm() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch("/api/bookings/createBooking", {
+      const response = await fetch(BASE_API + "/api/bookings/createBooking", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(bookingData),
       });
       if (response.ok) {
         alert("Booking created successfully");
-        // Optionally reset form or redirect user
         setBookingData({
           bookingDate: "",
           locationNo: "",

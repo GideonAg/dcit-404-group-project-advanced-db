@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { BASE_API } from "../utils";
 
 function AddRegistrationForm() {
   const [registrationData, setRegistrationData] = useState({
@@ -6,27 +7,34 @@ function AddRegistrationForm() {
     delegateNo: "",
     courseFeeNo: "",
     courseNo: "",
+    registerEmployeeNo: "",
   });
   const [delegates, setDelegates] = useState([]);
   const [courses, setCourses] = useState([]);
   const [courseFees, setCourseFees] = useState([]);
+  const [registerEmployees, setRegisterEmployees] = useState([]);
 
   // Fetch delegates, courses, and course fees on component mount
   useEffect(() => {
-    fetch("/api/delegates")
+    fetch(BASE_API + "/api/delegates")
       .then((response) => response.json())
       .then((data) => setDelegates(data))
       .catch((error) => console.error("Error fetching delegates:", error));
 
-    fetch("/api/courses")
+    fetch(BASE_API + "/api/courses")
       .then((response) => response.json())
       .then((data) => setCourses(data))
       .catch((error) => console.error("Error fetching courses:", error));
 
-    fetch("/api/courseFees")
+    fetch(BASE_API + "/api/courseFee")
       .then((response) => response.json())
       .then((data) => setCourseFees(data))
       .catch((error) => console.error("Error fetching course fees:", error));
+
+    fetch(BASE_API + "/api/employees")
+      .then((response) => response.json())
+      .then((data) => setRegisterEmployees(data))
+      .catch((error) => console.error("Error fetching employees:", error));
   }, []);
 
   const handleChange = (event) => {
@@ -40,7 +48,7 @@ function AddRegistrationForm() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch("/api/registrations/createRegistration", {
+      const response = await fetch(BASE_API + "/api/createRegistration", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(registrationData),
@@ -52,7 +60,7 @@ function AddRegistrationForm() {
           delegateNo: "",
           courseFeeNo: "",
           courseNo: "",
-        }); // Clear the form
+        });
       } else {
         alert("Failed to create registration");
       }
@@ -126,6 +134,27 @@ function AddRegistrationForm() {
               {courses.map((course) => (
                 <option key={course.courseNo} value={course.courseNo}>
                   {course.courseName}
+                </option>
+              ))}
+            </select>
+          </label>
+        </div>
+        <div>
+          <label>
+            Registering Employee:
+            <select
+              name="registerEmployeeNo"
+              value={registrationData.registerEmployeeNo}
+              onChange={handleChange}
+              required
+            >
+              <option value="">Select a Employee</option>
+              {registerEmployees.map((employee) => (
+                <option
+                  key={employee.registerEmployeeNo}
+                  value={employee.registerEmployeeNo}
+                >
+                  {employee.firstName}
                 </option>
               ))}
             </select>

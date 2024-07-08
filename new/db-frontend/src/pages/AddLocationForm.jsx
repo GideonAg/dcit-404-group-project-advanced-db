@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { BASE_API } from "../utils";
 
 function AddLocationForm() {
   const [locationData, setLocationData] = useState({
@@ -6,7 +7,6 @@ function AddLocationForm() {
     maxSize: "",
   });
 
-  // Update state on input change
   const handleChange = (event) => {
     const { name, value } = event.target;
     setLocationData((prevData) => ({
@@ -15,7 +15,6 @@ function AddLocationForm() {
     }));
   };
 
-  // Handle form submission
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (!locationData.locationName || !locationData.maxSize) {
@@ -24,7 +23,7 @@ function AddLocationForm() {
     }
 
     try {
-      const response = await fetch("/api/locations/createLocation", {
+      const response = await fetch(BASE_API + "/api/createLocation", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -32,14 +31,13 @@ function AddLocationForm() {
         body: JSON.stringify(locationData),
       });
       if (response.ok) {
-        console.log("Location created successfully");
-        // Clear form or handle other post-creation actions
+        alert.log("Location created successfully");
         setLocationData({
           locationName: "",
           maxSize: "",
         });
       } else {
-        console.error("Failed to create location");
+        alert("Failed to create location");
       }
     } catch (error) {
       console.error("Error creating location:", error);

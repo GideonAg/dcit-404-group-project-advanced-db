@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { BASE_API } from "../utils";
 
 function AddEmployeeForm() {
   const [formData, setFormData] = useState({
@@ -18,14 +19,13 @@ function AddEmployeeForm() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch("/api/employees", {
+      const response = await fetch(BASE_API + "/api/employees", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
       if (response.ok) {
         console.log("Employee created successfully");
-        // Optionally clear the form or give other user feedback
         setFormData({
           firstName: "",
           lastName: "",

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { BASE_API } from "../utils";
 
 function CreateCourse() {
   const [course, setCourse] = useState({
@@ -19,14 +20,14 @@ function CreateCourse() {
   useEffect(() => {
     // Fetch Employees
     async function fetchEmployees() {
-      const response = await fetch("/api/employees");
+      const response = await fetch(BASE_API + "/api/employees");
       const data = await response.json();
       setEmployees(data);
     }
 
     // Fetch Course Types
     async function fetchCourseTypes() {
-      const response = await fetch("/api/courseTypes");
+      const response = await fetch(BASE_API + "/api/courseTypes");
       const data = await response.json();
       setCourseTypes(data);
     }
@@ -46,7 +47,7 @@ function CreateCourse() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("/api/createCourse", {
+      const response = await fetch(BASE_API + "/api/courses", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(course),
