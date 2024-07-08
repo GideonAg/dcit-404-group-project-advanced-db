@@ -22,8 +22,7 @@ function AddCourseTypeForm() {
         body: JSON.stringify(formData),
       });
       if (response.ok) {
-        console.log("Course Type created successfully");
-        // Optionally clear the form or handle other post-creation logic
+        alert("Course Type created successfully");
         setFormData({
           courseTypeDescription: "",
         });
