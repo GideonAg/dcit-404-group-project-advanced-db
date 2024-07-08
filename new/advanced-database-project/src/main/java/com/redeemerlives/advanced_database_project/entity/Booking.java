@@ -1,8 +1,5 @@
-package com.redeemerlives.advanced_database_project;
+package com.redeemerlives.advanced_database_project.entity;
 
-import com.redeemerlives.advanced_database_project.entity.Course;
-import com.redeemerlives.advanced_database_project.entity.Employee;
-import com.redeemerlives.advanced_database_project.entity.Location;
 import jakarta.persistence.*;
 import lombok.Data;
 

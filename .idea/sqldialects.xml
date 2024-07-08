@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="SqlDialectMappings">
-    <file url="file://$PROJECT_DIR$/src/PL/SQL.sql" dialect="Oracle" />
+    <file url="file://$PROJECT_DIR$/new/advanced-database-project/src/main/java/com/redeemerlives/advanced_database_project/pl/db.sql" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/PL/SQL.sql" dialect="OracleSqlPlus" />
   </component>
 </project>

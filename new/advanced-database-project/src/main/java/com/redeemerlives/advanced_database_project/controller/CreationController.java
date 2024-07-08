@@ -1,6 +1,5 @@
 package com.redeemerlives.advanced_database_project.controller;
 
-import com.redeemerlives.advanced_database_project.Booking;
 import com.redeemerlives.advanced_database_project.entity.*;
 import com.redeemerlives.advanced_database_project.repository.*;
 import lombok.RequiredArgsConstructor;
