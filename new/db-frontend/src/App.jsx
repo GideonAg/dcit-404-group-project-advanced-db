@@ -9,6 +9,9 @@ import AddCourseFeeForm from "./pages/AddCourseFeeForm";
 import AddInvoiceForm from "./pages/AddInvoiceForm";
 import AddRegistrationForm from "./pages/AddRegistrationForm";
 import AddPaymentMethodForm from "./pages/AddPaymentMethodForm";
+import EmployeeList from "./pages/EmployeeList";
+import CourseList from "./pages/CourseList";
+import CourseUpdateForm from "./pages/CourseUpdateForm";
 
 function App() {
   return (
@@ -24,6 +27,12 @@ function App() {
         <Route path="/addInvoice" element={<AddInvoiceForm />} />
         <Route path="/addRegistration" element={<AddRegistrationForm />} />
         <Route path="/addPayment" element={<AddPaymentMethodForm />} />
+        <Route path="/employeeList" element={<EmployeeList />} />
+        <Route path="/courseList" element={<CourseList />} />
+        <Route
+          path="/courses/update/:courseNo"
+          element={<CourseUpdateForm />}
+        />
       </Routes>
     </BrowserRouter>
   );
