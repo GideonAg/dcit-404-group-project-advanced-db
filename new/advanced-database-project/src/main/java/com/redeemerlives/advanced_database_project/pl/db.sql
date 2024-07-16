@@ -84,24 +84,6 @@ CREATE TABLE PaymentMethod (
 );
 
 
-
--- Stored Procedure for Creating an Employee
-CREATE OR REPLACE PROCEDURE CreateEmployee (
-    p_firstName IN VARCHAR2,
-    p_lastName IN VARCHAR2,
-    p_position IN VARCHAR2
-) AS
-BEGIN
-INSERT INTO Employee (firstName, lastName, position)
-VALUES (p_firstName, p_lastName, p_position);
-COMMIT;
-EXCEPTION
-    WHEN OTHERS THEN
-        ROLLBACK;
-        RAISE;
-END CreateEmployee;
-
-
 -- Stored Procedure for Creating a Course
 CREATE OR REPLACE PROCEDURE CreateCourse (
     p_courseName IN VARCHAR2,
@@ -131,40 +113,6 @@ EXCEPTION
 END CreateCourse;
 
 
--- Stored Procedure for Creating a Booking
-CREATE OR REPLACE PROCEDURE CreateBooking (
-    p_bookingDate IN DATE,
-    p_locationNo IN NUMBER,
-    p_courseNo IN NUMBER,
-    p_bookingEmployeeNo IN NUMBER
-) AS
-BEGIN
-INSERT INTO Booking (bookingDate, locationNo, courseNo, bookingEmployeeNo)
-VALUES (p_bookingDate, p_locationNo, p_courseNo, p_bookingEmployeeNo);
-COMMIT;
-EXCEPTION
-    WHEN OTHERS THEN
-        ROLLBACK;
-        RAISE;
-END CreateBooking;
-
-
--- Stored Procedure for Creating a Location
-CREATE OR REPLACE PROCEDURE CreateLocation (
-    p_locationName IN VARCHAR2,
-    p_maxSize IN NUMBER
-) AS
-BEGIN
-INSERT INTO Location (locationName, maxSize)
-VALUES (p_locationName, p_maxSize);
-COMMIT;
-EXCEPTION
-    WHEN OTHERS THEN
-        ROLLBACK;
-        RAISE;
-END CreateLocation;
-
-
 -- Stored Procedure to Delete a Course
 CREATE OR REPLACE PROCEDURE DeleteCourse (
     p_courseNo IN NUMBER
@@ -186,37 +134,41 @@ END DeleteCourse;
 
 
 -- Retrieve a Course Using a Cursor
-DECLARE
-CURSOR course_cursor (p_courseNo NUMBER) IS
-SELECT courseName, courseDescription, startDate, endDate, startTime, endTime, maxDelegates, confirmed
-FROM Course
-WHERE courseNo = p_courseNo;
-
-v_course course_cursor%ROWTYPE;
+CREATE OR REPLACE PROCEDURE GET_COURSE_BY_ID_CURSOR(
+    p_courseNo IN NUMBER,
+    course_cursor OUT SYS_REFCURSOR
+) AS
 BEGIN
-OPEN course_cursor(p_courseNo);
-FETCH course_cursor INTO v_course;
-
-IF course_cursor%FOUND THEN
-        DBMS_OUTPUT.PUT_LINE('Course Name: ' || v_course.courseName);
-        DBMS_OUTPUT.PUT_LINE('Description: ' || v_course.courseDescription);
-        DBMS_OUTPUT.PUT_LINE('Start Date: ' || TO_CHAR(v_course.startDate, 'DD-MON-YYYY'));
-        DBMS_OUTPUT.PUT_LINE('End Date: ' || TO_CHAR(v_course.endDate, 'DD-MON-YYYY'));
-        DBMS_OUTPUT.PUT_LINE('Start Time: ' || TO_CHAR(v_course.startTime, 'HH24:MI'));
-        DBMS_OUTPUT.PUT_LINE('End Time: ' || TO_CHAR(v_course.endTime, 'HH24:MI'));
-        DBMS_OUTPUT.PUT_LINE('Max Delegates: ' || v_course.maxDelegates);
-        DBMS_OUTPUT.PUT_LINE('Confirmed: ' || v_course.confirmed);
-ELSE
-        DBMS_OUTPUT.PUT_LINE('No course found with the specified ID.');
-END IF;
-
-CLOSE course_cursor;
-EXCEPTION
-    WHEN OTHERS THEN
-        IF course_cursor%ISOPEN THEN
-            CLOSE course_cursor;
-END IF;
-        RAISE;
+    OPEN course_cursor FOR
+        SELECT courseName, courseDescription, startDate, endDate, startTime, endTime, maxDelegates, confirmed
+        FROM Course
+        WHERE courseNo = p_courseNo;
 END;
+/
 
+-- Update a Course Using a stored procedure
+CREATE OR REPLACE PROCEDURE UPDATE_COURSE(
+    p_courseNo IN NUMBER,
+    p_courseName IN VARCHAR2,
+    p_courseDescription IN VARCHAR2,
+    p_startDate IN DATE,
+    p_endDate IN DATE,
+    p_startTime IN DATE,
+    p_endTime IN DATE,
+    p_maxDelegates IN NUMBER,
+    p_confirmed IN CHAR
+) AS
+BEGIN
+    UPDATE Course
+    SET courseName = p_courseName,
+        courseDescription = p_courseDescription,
+        startDate = p_startDate,
+        endDate = p_endDate,
+        startTime = p_startTime,
+        endTime = p_endTime,
+        maxDelegates = p_maxDelegates,
+        confirmed = p_confirmed
+    WHERE courseNo = p_courseNo;
+END;
+/
 

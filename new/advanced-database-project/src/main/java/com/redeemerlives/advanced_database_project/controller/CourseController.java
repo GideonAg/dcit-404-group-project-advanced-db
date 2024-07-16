@@ -38,10 +38,15 @@ public class CourseController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getCourseById(@PathVariable Long id) {
-        return courseRepository.findById(id)
-                .map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.notFound().build());
+    public ResponseEntity<Course> getCourseByIdUsingCursor(@PathVariable Long id) {
+        return ResponseEntity.ok(courseRepository.getCourseByIdUsingCursor(id));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<String> updateCourse(@PathVariable Long id, @RequestBody Course course) {
+        course.setCourseNo(id);
+        courseRepository.updateCourse(course);
+        return ResponseEntity.ok("Course updated successfully");
     }
 
     @GetMapping

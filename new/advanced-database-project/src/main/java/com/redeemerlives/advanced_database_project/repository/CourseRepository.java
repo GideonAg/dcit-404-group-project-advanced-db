@@ -13,7 +13,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 @Repository
-public interface CourseRepository extends JpaRepository<Course, Long> {
+public interface CourseRepository extends JpaRepository<Course, Long>, CourseRepositoryCustom {
 
     @Procedure(name = "CreateCourse")
     void createCourse(String courseName, String courseDescription, LocalDate startDate, LocalTime startTime,
