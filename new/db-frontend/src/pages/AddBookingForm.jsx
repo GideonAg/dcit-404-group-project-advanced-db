@@ -79,7 +79,7 @@ function AddBookingForm() {
 
   // Fetch Locations, Courses, and Employees on component mount
   useEffect(() => {
-    fetch(BASE_API + "/api/locations")
+    fetch(BASE_API + "/api/createLocation")
       .then((res) => res.json())
       .then(setLocations);
     fetch(BASE_API + "/api/courses")
@@ -101,7 +101,7 @@ function AddBookingForm() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch(BASE_API + "/api/bookings/createBooking", {
+      const response = await fetch(BASE_API + "/api/createBooking", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(bookingData),

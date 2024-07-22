@@ -12,6 +12,8 @@ import AddPaymentMethodForm from "./pages/AddPaymentMethodForm";
 import EmployeeList from "./pages/EmployeeList";
 import CourseList from "./pages/CourseList";
 import CourseUpdateForm from "./pages/CourseUpdateForm";
+import DelegatePage from "./pages/DelegatePage";
+import Client from "./pages/Client";
 
 function App() {
   return (
@@ -29,6 +31,8 @@ function App() {
         <Route path="/addPayment" element={<AddPaymentMethodForm />} />
         <Route path="/employeeList" element={<EmployeeList />} />
         <Route path="/courseList" element={<CourseList />} />
+        <Route path="/addDelegate" element={<DelegatePage />} />
+        <Route path="/addClient" element={<Client />} />
         <Route
           path="/courses/update/:courseNo"
           element={<CourseUpdateForm />}

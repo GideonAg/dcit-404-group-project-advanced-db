@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { BASE_API } from "../utils";
 
 function EmployeeList() {
@@ -11,7 +11,7 @@ function EmployeeList() {
 
   const fetchEmployees = async () => {
     setLoading(true);
-    const response = await fetch("/api/employees");
+    const response = await fetch(BASE_API + "/api/employees");
     const data = await response.json();
     setEmployees(data);
     setLoading(false);
@@ -33,9 +33,11 @@ function EmployeeList() {
       <h1>Employees</h1>
       <ul>
         {employees.map((employee) => (
-          <li key={employee.id}>
+          <li key={employee.employeeNo}>
             {employee.firstName} {employee.lastName} - {employee.position}
-            <button onClick={() => handleDelete(employee.id)}>Delete</button>
+            <button onClick={() => handleDelete(employee.employeeNo)}>
+              Delete
+            </button>
           </li>
         ))}
       </ul>

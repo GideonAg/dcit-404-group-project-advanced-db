@@ -12,6 +12,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/courses")
 @RequiredArgsConstructor
+@CrossOrigin
 public class CourseController {
 
     private final CourseRepository courseRepository;
@@ -19,18 +20,19 @@ public class CourseController {
     @PostMapping
     public ResponseEntity<String> createCourse(@RequestBody Course course) {
         try {
-            courseRepository.createCourse(
-                    course.getCourseName(),
-                    course.getCourseDescription(),
-                    course.getStartDate(),
-                    course.getStartTime(),
-                    course.getEndDate(),
-                    course.getEndTime(),
-                    course.getMaxDelegates(),
-                    course.getConfirmed(),
-                    course.getDeliverer().getEmployeeNo(),
-                    course.getCourseType().getCourseTypeNo()
-            );
+//            courseRepository.createCourse(
+//                    course.getCourseName(),
+//                    course.getCourseDescription(),
+//                    course.getStartDate(),
+//                    course.getStartTime(),
+//                    course.getEndDate(),
+//                    course.getEndTime(),
+//                    course.getMaxDelegates(),
+//                    course.getConfirmed(),
+//                    course.getDeliverer().getEmployeeNo(),
+//                    course.getCourseType().getCourseTypeNo()
+//            );
+            courseRepository.save(course);
             return new ResponseEntity<>("Course created successfully", HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>("Failed to create course: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
@@ -39,7 +41,8 @@ public class CourseController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Course> getCourseByIdUsingCursor(@PathVariable Long id) {
-        return ResponseEntity.ok(courseRepository.getCourseByIdUsingCursor(id));
+        return ResponseEntity.ok(courseRepository.findById(id).get());
+//        return ResponseEntity.ok(courseRepository.getCourseByIdUsingCursor(id));
     }
 
     @PutMapping("/{id}")

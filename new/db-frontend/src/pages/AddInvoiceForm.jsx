@@ -79,14 +79,11 @@ function AddInvoiceForm() {
   const [registrations, setRegistrations] = useState([]);
   const [paymentMethods, setPaymentMethods] = useState([]);
 
-  // Fetch Registrations and Payment Methods on component mount
   useEffect(() => {
-    fetch(BASE_API + "/api/registrations")
+    fetch(BASE_API + "/api/createRegistration")
       .then((response) => response.json())
       .then((data) => setRegistrations(data))
-      .catch((error) =>
-        console.error("Error fetching registrations:", error)
-      );
+      .catch((error) => console.error("Error fetching registrations:", error));
 
     fetch(BASE_API + "/api/getPayment")
       .then((response) => response.json())

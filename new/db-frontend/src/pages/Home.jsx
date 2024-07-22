@@ -56,6 +56,8 @@ export const Home = () => {
         <LinkItem href="/addPayment">Add Payment method</LinkItem>
         <LinkItem href="/employeeList">All employees</LinkItem>
         <LinkItem href="/courseList">All courses</LinkItem>
+        <LinkItem href="/addDelegate">Delegate page</LinkItem>
+        <LinkItem href="/addClient">Client page</LinkItem>
       </LinkList>
     </Container>
   );

@@ -11,6 +11,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
+@CrossOrigin
 public class CreationController {
 
     private final LocationRepository locationRepository;
@@ -26,6 +27,8 @@ public class CreationController {
     private final RegistrationRepository registrationRepository;
 
     private final PaymentMethodRepository paymentMethodRepository;
+
+    private final ClientRepository clientRepository;
 
     @PostMapping("/createLocation")
     public ResponseEntity<Location> createLocation(@RequestBody Location location) {
@@ -78,6 +81,11 @@ public class CreationController {
         return ResponseEntity.ok(savedRegistration);
     }
 
+    @GetMapping("/createRegistration")
+    public ResponseEntity<List<Registration>> getAllRegistrations() {
+        return ResponseEntity.ok(registrationRepository.findAll());
+    }
+
     @PostMapping("/createPayment")
     public ResponseEntity<PaymentMethod> createPayment(@RequestBody PaymentMethod paymentMethod) {
         PaymentMethod paymentMethod1 = paymentMethodRepository.save(paymentMethod);
@@ -87,6 +95,17 @@ public class CreationController {
     @GetMapping("/getPayment")
     public ResponseEntity<List<PaymentMethod>> getAllPayments() {
         return ResponseEntity.ok(paymentMethodRepository.findAll());
+    }
+
+    @GetMapping("/client")
+    public ResponseEntity<List<Client>> getAllClients() {
+        return ResponseEntity.ok(clientRepository.findAll());
+    }
+
+    @PostMapping("/client")
+    public ResponseEntity<Void> createClient(@RequestBody Client client) {
+        clientRepository.save(client);
+        return ResponseEntity.ok().build();
     }
 }
 

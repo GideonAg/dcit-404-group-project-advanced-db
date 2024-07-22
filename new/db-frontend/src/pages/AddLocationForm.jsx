@@ -89,7 +89,7 @@ function AddLocationForm() {
         body: JSON.stringify(locationData),
       });
       if (response.ok) {
-        console.log("Location created successfully");
+        alert("Location created successfully");
         setLocationData({
           locationName: "",
           maxSize: "",

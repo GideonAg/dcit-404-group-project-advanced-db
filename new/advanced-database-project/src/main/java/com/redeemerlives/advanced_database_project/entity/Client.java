@@ -12,6 +12,9 @@ public class Client {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long clientNo;
 
+    private String clientFName;
+    private String clientLName;
+
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Delegate> delegates;
 

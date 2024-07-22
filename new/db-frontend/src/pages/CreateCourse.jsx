@@ -69,7 +69,7 @@ function CreateCourse() {
     startTime: "",
     endTime: "",
     maxDelegates: "",
-    confirmed: true,
+    confirmed: "",
     delivererEmployeeNo: "",
     courseTypeNo: "",
   });
@@ -226,6 +226,23 @@ function CreateCourse() {
               {emp.firstName} {emp.lastName}
             </option>
           ))}
+        </Select>
+      </FormGroup>
+      <FormGroup>
+        <Label>Confirmed:</Label>
+        <Select
+          name="confirmed"
+          value={course.confirmed}
+          onChange={handleChange}
+          required
+        >
+          <option value="">Select if confirmed</option>
+          <option key={"T"} value={true}>
+            True
+          </option>
+          <option key={"F"} value={false}>
+            False
+          </option>
         </Select>
       </FormGroup>
       <FormGroup>

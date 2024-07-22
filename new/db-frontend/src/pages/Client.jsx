@@ -59,85 +59,75 @@ const Button = styled.button`
   }
 `;
 
-function AddEmployeeForm() {
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    position: "",
+function Client() {
+  const [client, setClient] = useState({
+    clientFName: "",
+    clientLName: "",
   });
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setFormData((prev) => ({
-      ...prev,
+    setClient((prevData) => ({
+      ...prevData,
       [name]: value,
     }));
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
     try {
-      const response = await fetch(BASE_API + "/api/employees", {
+      const response = await fetch(BASE_API + "/api/client", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(client),
       });
       if (response.ok) {
-        alert("Employee created successfully");
-        setFormData({
-          firstName: "",
-          lastName: "",
-          position: "",
+        alert("Client created successfully");
+        setClient({
+          clientFName: "",
+          clientLName: "",
         });
       } else {
-        console.error("Failed to create employee");
+        alert("Failed to create client");
       }
     } catch (error) {
-      console.error("Error creating employee:", error);
+      console.error("Error creating client:", error);
     }
   };
 
   return (
     <Container>
-      <Title>Create Employee</Title>
+      <Title>Add New Client</Title>
       <Form onSubmit={handleSubmit}>
         <FormGroup>
-          <Label>First Name:</Label>
+          <Label>Client First Name:</Label>
           <Input
             type="text"
-            name="firstName"
-            value={formData.firstName}
+            name="clientFName"
+            value={client.clientFName}
             onChange={handleChange}
             placeholder="Enter first name"
             required
           />
         </FormGroup>
         <FormGroup>
-          <Label>Last Name:</Label>
+          <Label>Client Last Name:</Label>
           <Input
             type="text"
-            name="lastName"
-            value={formData.lastName}
+            name="clientLName"
+            value={client.clientLName}
             onChange={handleChange}
             placeholder="Enter last name"
             required
           />
         </FormGroup>
-        <FormGroup>
-          <Label>Position:</Label>
-          <Input
-            type="text"
-            name="position"
-            value={formData.position}
-            onChange={handleChange}
-            placeholder="Enter position"
-            required
-          />
-        </FormGroup>
-        <Button type="submit">Create Employee</Button>
+        <Button type="submit">Create Client</Button>
       </Form>
     </Container>
   );
 }
 
-export default AddEmployeeForm;
+export default Client;

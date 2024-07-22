@@ -59,6 +59,7 @@ const CourseList = () => {
         setCourses(courses.filter((course) => course.courseNo !== courseNo));
       })
       .catch((error) => {
+        console.log(error);
         alert("There was an error deleting the course!");
       });
   }

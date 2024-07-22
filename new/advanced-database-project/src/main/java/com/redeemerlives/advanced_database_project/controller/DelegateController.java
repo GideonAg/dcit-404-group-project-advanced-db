@@ -4,15 +4,14 @@ import com.redeemerlives.advanced_database_project.entity.Delegate;
 import com.redeemerlives.advanced_database_project.repository.DelegateRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController("/api/delegates")
+@RestController
+@RequestMapping("/api/delegates")
 @RequiredArgsConstructor
+@CrossOrigin
 public class DelegateController {
 
     private final DelegateRepository delegateRepository;
