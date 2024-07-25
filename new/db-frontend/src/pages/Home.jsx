@@ -1,64 +1,80 @@
 import React from "react";
-import styled from "styled-components";
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
-  font-family: Arial, sans-serif;
-  background-color: #f0f0f0;
-  height: 100vh;
-`;
-
-const Title = styled.h1`
-  color: #333;
-  margin-bottom: 20px;
-`;
-
-const LinkList = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  width: 200px;
-`;
-
-const LinkItem = styled.a`
-  display: block;
-  text-decoration: none;
-  padding: 10px;
-  border-radius: 5px;
-  background-color: #fff;
-  color: #0073e6;
-  text-align: center;
-  border: 1px solid #0073e6;
-  transition: background-color 0.3s, color 0.3s;
-
-  &:hover {
-    background-color: #0073e6;
-    color: #fff;
-  }
-`;
 
 export const Home = () => {
+  const containerStyle = {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    padding: "20px",
+    fontFamily: "Arial, sans-serif",
+    backgroundColor: "#f0f0f0",
+    height: "100vh",
+  };
+
+  const titleStyle = {
+    color: "#333",
+    marginBottom: "20px",
+  };
+
+  const linkListStyle = {
+    display: "grid",
+    gridTemplateColumns: "repeat(3, 1fr)",
+    gap: "10px",
+    width: "100%",
+    maxWidth: "800px",
+  };
+
+  const linkItemStyle = {
+    display: "block",
+    textDecoration: "none",
+    padding: "10px",
+    borderRadius: "5px",
+    backgroundColor: "#fff",
+    color: "#0073e6",
+    textAlign: "center",
+    border: "1px solid #0073e6",
+    transition: "background-color 0.3s, color 0.3s",
+  };
+
+  const linkItemHoverStyle = {
+    backgroundColor: "#0073e6",
+    color: "#fff",
+  };
+
   return (
-    <Container>
-      <Title>Home here, hi there</Title>
-      <LinkList>
-        <LinkItem href="/course">Add course</LinkItem>
-        <LinkItem href="/addEmployee">Add employee</LinkItem>
-        <LinkItem href="/addCourseType">Add course type</LinkItem>
-        <LinkItem href="/addLocation">Add location</LinkItem>
-        <LinkItem href="/addBooking">Add Booking</LinkItem>
-        <LinkItem href="/addCourseFee">Add Course Fee</LinkItem>
-        <LinkItem href="/addInvoice">Add Invoice</LinkItem>
-        <LinkItem href="/addRegistration">Add Registration</LinkItem>
-        <LinkItem href="/addPayment">Add Payment method</LinkItem>
-        <LinkItem href="/employeeList">All employees</LinkItem>
-        <LinkItem href="/courseList">All courses</LinkItem>
-        <LinkItem href="/addDelegate">Delegate page</LinkItem>
-        <LinkItem href="/addClient">Client page</LinkItem>
-      </LinkList>
-    </Container>
+    <div style={containerStyle}>
+      <h1 style={titleStyle}>Navigate through the pages</h1>
+      <div style={linkListStyle}>
+        {[
+          { href: "/course", text: "Add course" },
+          { href: "/addEmployee", text: "Add employee" },
+          { href: "/addCourseType", text: "Add course type" },
+          { href: "/addLocation", text: "Add location" },
+          { href: "/addBooking", text: "Add Booking" },
+          { href: "/addCourseFee", text: "Add Course Fee" },
+          { href: "/addInvoice", text: "Add Invoice" },
+          { href: "/addRegistration", text: "Add Registration" },
+          { href: "/addPayment", text: "Add Payment method" },
+          { href: "/employeeList", text: "All employees" },
+          { href: "/courseList", text: "All courses" },
+          { href: "/addDelegate", text: "Delegate page" },
+          { href: "/addClient", text: "Client page" },
+        ].map((link) => (
+          <a
+            key={link.href}
+            href={link.href}
+            style={linkItemStyle}
+            onMouseOver={(e) =>
+              Object.assign(e.currentTarget.style, linkItemHoverStyle)
+            }
+            onMouseOut={(e) =>
+              Object.assign(e.currentTarget.style, linkItemStyle)
+            }
+          >
+            {link.text}
+          </a>
+        ))}
+      </div>
+    </div>
   );
 };
