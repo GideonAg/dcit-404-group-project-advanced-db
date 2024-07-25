@@ -107,7 +107,6 @@ CREATE TABLE employee_activity_log (
 );
 
 
--- Trigger for INSERT and DELETE on employee table
 CREATE OR REPLACE TRIGGER trg_employee_activity
     AFTER INSERT OR DELETE ON employee
     FOR EACH ROW
@@ -129,7 +128,6 @@ END;
 /
 
 
--- Trigger for UPDATE on employee table
 CREATE OR REPLACE TRIGGER trg_employee_update_activity
     AFTER UPDATE ON employee
     FOR EACH ROW
@@ -148,8 +146,6 @@ BEGIN
 END;
 /
 
-
--- Stored Procedure for Creating a Course
 CREATE OR REPLACE PROCEDURE create_course (
     p_course_name IN VARCHAR2,
     p_course_description IN VARCHAR2,
@@ -176,7 +172,6 @@ END;
 /
 
 
--- CREATE EMPLOYEE
 CREATE OR REPLACE PROCEDURE create_employee (
     p_first_name IN VARCHAR2,
     p_last_name IN VARCHAR2,
@@ -188,7 +183,6 @@ BEGIN
 END;
 /
 
--- GET ALL EMPLOYEES
 CREATE OR REPLACE PROCEDURE get_all_employees (
     p_cursor OUT SYS_REFCURSOR
 ) AS
@@ -200,7 +194,6 @@ END;
 /
 
 
--- DELETE ONE EMPLOYEE
 CREATE OR REPLACE PROCEDURE delete_employee (
     p_employee_no IN NUMBER
 ) AS
@@ -225,7 +218,6 @@ END;
 /
 
 
--- GET ONE EMPLOYEE
 CREATE OR REPLACE PROCEDURE get_employee (
     p_employee_no IN NUMBER,
     p_cursor OUT SYS_REFCURSOR
@@ -238,7 +230,6 @@ BEGIN
 END;
 /
 
--- UPDATE ONE EMPLOYEE
 CREATE OR REPLACE PROCEDURE update_employee (
     p_employee_no IN NUMBER,
     p_first_name IN VARCHAR2,
