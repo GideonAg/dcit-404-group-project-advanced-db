@@ -15,12 +15,14 @@ import CourseUpdateForm from "./pages/CourseUpdateForm";
 import DelegatePage from "./pages/DelegatePage";
 import Client from "./pages/Client";
 import UpdateEmployee from "./pages/UpdateEmployee";
+import BackupButton from "./pages/BackupButton";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/backup-database" element={<BackupButton />} />
         <Route path="/course" element={<CreateCourse />} />
         <Route path="/addEmployee" element={<AddEmployeeForm />} />
         <Route path="/addCourseType" element={<AddCourseTypeForm />} />

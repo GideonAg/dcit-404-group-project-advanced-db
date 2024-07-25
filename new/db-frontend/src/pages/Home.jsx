@@ -45,6 +45,7 @@ export const Home = () => {
     <Container>
       <Title>Home here, hi there</Title>
       <LinkList>
+        <LinkItem href="/backup-database">Backup database</LinkItem>
         <LinkItem href="/course">Add course</LinkItem>
         <LinkItem href="/addEmployee">Add employee</LinkItem>
         <LinkItem href="/addCourseType">Add course type</LinkItem>
