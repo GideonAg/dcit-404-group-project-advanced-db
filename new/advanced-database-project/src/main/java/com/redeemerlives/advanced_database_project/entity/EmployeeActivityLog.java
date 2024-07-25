@@ -1,5 +1,5 @@
 package com.redeemerlives.advanced_database_project.entity;
-
+        
 import jakarta.persistence.*;
 import lombok.Data;
 

@@ -1,50 +1,82 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import CreateCourse from "./pages/CreateCourse";
-import AddEmployeeForm from "./pages/AddEmployeeForm";
-import AddCourseTypeForm from "./pages/AddCourseTypeForm";
-import { Home } from "./pages/Home";
-import AddLocationForm from "./pages/AddLocationForm";
-import AddBookingForm from "./pages/AddBookingForm";
-import AddCourseFeeForm from "./pages/AddCourseFeeForm";
-import AddInvoiceForm from "./pages/AddInvoiceForm";
-import AddRegistrationForm from "./pages/AddRegistrationForm";
-import AddPaymentMethodForm from "./pages/AddPaymentMethodForm";
-import EmployeeList from "./pages/EmployeeList";
-import CourseList from "./pages/CourseList";
-import CourseUpdateForm from "./pages/CourseUpdateForm";
-import DelegatePage from "./pages/DelegatePage";
-import Client from "./pages/Client";
-import UpdateEmployee from "./pages/UpdateEmployee";
+import React from "react";
 
-function App() {
+export const Home = () => {
+  const containerStyle = {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    padding: "20px",
+    fontFamily: "Arial, sans-serif",
+    backgroundColor: "#f0f0f0",
+    height: "100vh",
+  };
+
+  const titleStyle = {
+    color: "#333",
+    marginBottom: "20px",
+  };
+
+  const linkListStyle = {
+    display: "grid",
+    gridTemplateColumns: "repeat(3, 1fr)",
+    gap: "10px",
+    width: "100%",
+    maxWidth: "800px",
+  };
+
+  const linkItemStyle = {
+    display: "block",
+    textDecoration: "none",
+    padding: "10px",
+    borderRadius: "5px",
+    backgroundColor: "#fff",
+    color: "#0073e6",
+    textAlign: "center",
+    border: "1px solid #0073e6",
+    transition: "background-color 0.3s, color 0.3s",
+  };
+
+  const linkItemHoverStyle = {
+    backgroundColor: "#0073e6",
+    color: "#fff",
+  };
+
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/course" element={<CreateCourse />} />
-        <Route path="/addEmployee" element={<AddEmployeeForm />} />
-        <Route path="/addCourseType" element={<AddCourseTypeForm />} />
-        <Route path="/addLocation" element={<AddLocationForm />} />
-        <Route path="/addBooking" element={<AddBookingForm />} />
-        <Route path="/addCourseFee" element={<AddCourseFeeForm />} />
-        <Route path="/addInvoice" element={<AddInvoiceForm />} />
-        <Route path="/addRegistration" element={<AddRegistrationForm />} />
-        <Route path="/addPayment" element={<AddPaymentMethodForm />} />
-        <Route path="/employeeList" element={<EmployeeList />} />
-        <Route
-          path="/update-employee/:employeeNo"
-          element={<UpdateEmployee />}
-        />
-        <Route path="/courseList" element={<CourseList />} />
-        <Route path="/addDelegate" element={<DelegatePage />} />
-        <Route path="/addClient" element={<Client />} />
-        <Route
-          path="/courses/update/:courseNo"
-          element={<CourseUpdateForm />}
-        />
-      </Routes>
-    </BrowserRouter>
+    <div style={containerStyle}>
+      <h1 style={titleStyle}>Navigate through the pages</h1>
+      <div style={linkListStyle}>
+        {[
+          { href: "/course", text: "Add course" },
+          { href: "/addEmployee", text: "Add employee" },
+          { href: "/addCourseType", text: "Add course type" },
+          { href: "/addLocation", text: "Add location" },
+          { href: "/addBooking", text: "Add Booking" },
+          { href: "/addCourseFee", text: "Add Course Fee" },
+          { href: "/addInvoice", text: "Add Invoice" },
+          { href: "/addRegistration", text: "Add Registration" },
+          { href: "/addPayment", text: "Add Payment method" },
+          { href: "/employeeList", text: "All employees" },
+          { href: "/courseList", text: "All courses" },
+          { href: "/addDelegate", text: "Delegate page" },
+          { href: "/addClient", text: "Client page" },
+        ].map((link) => (
+          <a
+            key={link.href}
+            href={link.href}
+            style={linkItemStyle}
+            onMouseOver={(e) =>
+              Object.assign(e.currentTarget.style, linkItemHoverStyle)
+            }
+            onMouseOut={(e) =>
+              Object.assign(e.currentTarget.style, linkItemStyle)
+            }
+          >
+            {link.text}
+          </a>
+        ))}
+      </div>
+    </div>
   );
-}
+};
 
-export default App;
+export default Home;
