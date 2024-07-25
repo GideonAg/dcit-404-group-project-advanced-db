@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom"; // Assuming you're using react-router
 import { BASE_API } from "../utils";
 
 function EmployeeList() {
   const [employees, setEmployees] = useState([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchEmployees();
@@ -26,6 +28,10 @@ function EmployeeList() {
     }
   };
 
+  const handleUpdate = (employeeId) => {
+    navigate(`/update-employee/${employeeId}`);
+  };
+
   if (loading) return <p>Loading employees...</p>;
 
   return (
@@ -37,6 +43,9 @@ function EmployeeList() {
             {employee.firstName} {employee.lastName} - {employee.position}
             <button onClick={() => handleDelete(employee.employeeNo)}>
               Delete
+            </button>
+            <button onClick={() => handleUpdate(employee.employeeNo)}>
+              Update
             </button>
           </li>
         ))}

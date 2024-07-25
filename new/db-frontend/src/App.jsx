@@ -14,6 +14,7 @@ import CourseList from "./pages/CourseList";
 import CourseUpdateForm from "./pages/CourseUpdateForm";
 import DelegatePage from "./pages/DelegatePage";
 import Client from "./pages/Client";
+import UpdateEmployee from "./pages/UpdateEmployee";
 
 function App() {
   return (
@@ -30,6 +31,10 @@ function App() {
         <Route path="/addRegistration" element={<AddRegistrationForm />} />
         <Route path="/addPayment" element={<AddPaymentMethodForm />} />
         <Route path="/employeeList" element={<EmployeeList />} />
+        <Route
+          path="/update-employee/:employeeNo"
+          element={<UpdateEmployee />}
+        />
         <Route path="/courseList" element={<CourseList />} />
         <Route path="/addDelegate" element={<DelegatePage />} />
         <Route path="/addClient" element={<Client />} />
