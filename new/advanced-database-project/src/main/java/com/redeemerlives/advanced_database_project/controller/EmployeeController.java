@@ -18,23 +18,31 @@ public class EmployeeController {
     private EmployeeRepository employeeRepository;
 
     @PostMapping
-    public ResponseEntity<Employee> createEmployee(@RequestBody Employee employee) {
-        try {
-            Employee savedEmployee = employeeRepository.save(employee);
-            return ResponseEntity.ok(savedEmployee);
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(null);
-        }
+    public ResponseEntity<Void> createEmployee(@RequestBody Employee employee) {
+
+        employeeRepository.createEmployee(employee.getFirstName(), employee.getLastName(), employee.getPosition());
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @GetMapping
     public ResponseEntity<List<Employee>> getAllEmployees() {
-        return ResponseEntity.ok(employeeRepository.findAll());
+        return ResponseEntity.ok(employeeRepository.getAllEmployees());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Employee> getEmployee(@PathVariable Long id) {
+        return ResponseEntity.ok(employeeRepository.getEmployee(id));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Void> updateEmployee(@PathVariable Long id, @RequestBody Employee employee) {
+        employeeRepository.updateEmployee(id, employee.getFirstName(), employee.getLastName(), employee.getPosition());
+        return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteEmployeeById(@PathVariable Long id) {
-        employeeRepository.deleteById(id);
+        employeeRepository.deleteEmployeeById(id);
         return ResponseEntity.accepted().build();
     }
 }
